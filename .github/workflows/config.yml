@@ -117,15 +117,17 @@ jobs:
         run: npm install
 
       - name: Publish to npm
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          CURRENT_VERSION=$(npm show crazy-time-react-comment-lib version)
-          LOCAL_VERSION=$(node -pe "require('./package.json').version")
-          if [ "$CURRENT_VERSION" != "$LOCAL_VERSION" ]; then
-            echo "Publishing to npm."
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+          CURRENT_VERSION=$(npm show crazy-time-react-comment-lib version || echo "not_found")
+          LOCAL_VERSION=$(node -p "require('./package.json').version")
+          
+          if [ "$CURRENT_VERSION" = "not_found" ] || [ "$CURRENT_VERSION" != "$LOCAL_VERSION" ]; then
+            echo "Publishing new version to npm."
             npm publish
           else
-            echo "Versions match. Skipping npm publish."
+            echo "Version $LOCAL_VERSION already exists on npm. Skipping publish."
           fi
-
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      
