@@ -1,6 +1,6 @@
 {
   "name": "crazy-time-react-comment-lib",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React comment lib",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.jsx",
