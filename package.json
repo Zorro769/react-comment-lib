@@ -1,5 +1,5 @@
 {
-  "name": "react-comment-lib",
+  "name": "crazy-time-react-comment-lib",
   "version": "0.0.1",
   "description": "React comment lib",
   "main": "dist/cjs/index.js",
