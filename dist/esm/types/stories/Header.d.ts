@@ -1,4 +1,4 @@
-import './header.css';
+import "./header.css";
 type User = {
     name: string;
 };
